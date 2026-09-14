@@ -1,0 +1,53 @@
+plugins {
+    // Javaプロジェクトとしてビルドするための標準プラグイン
+    id 'java'
+
+    // Spring Bootアプリとして実行・ビルドできるようにする
+    id 'org.springframework.boot' version '3.4.13'
+
+    // Spring Bootが管理する依存ライブラリのバージョンを利用する
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    // 今回の設計書で指定しているJava 21を使用する
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    // Spring BootなどのライブラリをMaven Centralから取得する
+    mavenCentral()
+}
+
+dependencies {
+    // MVC・ControllerなどWebアプリに必要
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // ThymeleafによるHTML画面表示に必要
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // JpaRepositoryなどSpring Data JPAに必要
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // @NotBlank、@Size、@Validなどに必要
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // 今回使用するインメモリDB
+    runtimeOnly 'com.h2database:h2'
+
+    // Spring Bootのテスト機能
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // JUnit Platformでテストを実行するためのランチャー
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    // JUnit 5系のテストを実行する
+    useJUnitPlatform()
+}
