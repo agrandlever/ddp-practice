@@ -1,1 +1,17 @@
+# VS Code等の履歴
 .history/
+
+# Gradleのローカルキャッシュ
+**/.gradle/
+
+# ビルド生成物
+**/build/
+**/bin/
+**/out/
+
+# 手動で展開・ダウンロードしたGradle本体
+**/gradle-temp/
+**/gradle-*-bin.zip
+
+# ログ
+**/*.log
