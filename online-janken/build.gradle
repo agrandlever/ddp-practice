@@ -1,0 +1,46 @@
+plugins {
+    // Javaプロジェクトとしてコンパイル・テストできるようにする。
+    id 'java'
+
+    // Spring Bootアプリとして実行・ビルドできるようにする。
+    // DDP07で動作確認済みの3.4.13を今回も使用する。
+    id 'org.springframework.boot' version '3.4.13'
+
+    // Spring Bootが管理するライブラリのバージョンを利用する。
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    // 今回の学習環境で使用しているJava 21を指定する。
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    // Spring BootなどのライブラリをMaven Centralから取得する。
+    mavenCentral()
+}
+
+dependencies {
+    // ControllerやHTTPリクエスト処理など、
+    // Spring MVCを使用するために必要。
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // HTMLをThymeleafテンプレートとして表示するために必要。
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // Spring Bootのテスト機能を利用する。
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // JUnit 5系のテストを実行するためのランチャー。
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    // JUnit Platformを使ってテストを実行する。
+    useJUnitPlatform()
+}

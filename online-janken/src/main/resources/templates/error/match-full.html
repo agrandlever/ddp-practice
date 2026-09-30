@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>参加できません</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+<!-- 参加上限の通知のみを中央に表示し、操作ボタンは設けない。 -->
+<main>
+    <h1>参加できません</h1>
+    <p th:text="${errorMessage ?: '現在対戦中のため参加できません。'}">現在対戦中のため参加できません。</p>
+</main>
+</body>
+</html>

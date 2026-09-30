@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>オンラインじゃんけん</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+    <!-- deferにより、HTMLの読み込み後に画面の要素を操作する。 -->
+    <script th:src="@{/js/index.js}" src="/js/index.js" defer></script>
+</head>
+<body>
+<main>
+    <h1>オンラインじゃんけん</h1>
+    <!-- 切断通知はタイトルと待機メッセージの間に、一度だけ表示する。 -->
+    <p id="opponent-disconnected-message" hidden>対戦相手との通信が切断されました</p>
+    <!-- 属性が存在しない内部エラー時も、trueとの比較なら安全に判定できる。 -->
+    <p th:if="${waiting == true}">対戦相手を待っています</p>
+    <!-- APIエラーにも使うため要素を残す。MSG-003専用の装飾は付けない。 -->
+    <p id="communication-error" aria-live="polite" hidden
+       th:hidden="${errorCode != 'INTERNAL_ERROR'}"
+       th:text="${errorMessage ?: '通信エラーが発生しました。ページを再読み込みしてください。'}"></p>
+</main>
+</body>
+</html>
